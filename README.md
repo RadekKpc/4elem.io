@@ -9,14 +9,15 @@ Izabela Czajowska<br/>
 #### I ETAP
 
 * Server: 14.04.2020r.
-===
+
 1. Zainicjalizowanie danych (tablica klientów wraz z informacjami o nich)
 2. Zaimplementowanie nasłuchiwania.
 3. Tworzenie osobnego wątku dla każdego podłączonego klienta.
 4. Funkcja obsługująca pobieranie i wysyłanie danych do klienta, oraz aktualizacje zmiennych (asynchroniczne wywoływana z funkcji głównej programu w innych wątku)
+5. Ładne Readme.md
 
 * Client: 28.04.2020r.
-===
+
 (Plik implementujący logikę łączenia się z serwerem, wysyłania i pobierania danych)<br/>
 1. Funkcja łącząca się, pobierająca id, wysyłająca UserName
 2. Wysłanie danych ( pozycja i wszystkie niezbędne dane o grze)
@@ -24,7 +25,7 @@ Izabela Czajowska<br/>
 
 * Aplikacja (Desktopowa aplikacja wykorzystująca
 pygame): 12.05.2020 r.
-===
+
 1. Wyświetlanie mapy
 2. Wyświetlanie Gracza
 3. Wyświetlanie innych graczy
