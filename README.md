@@ -1,11 +1,11 @@
 # 4elem.io
 
-## Harmonogram projektu
 <b>Przedmiot</b> Programowanie w języku Python</br>
 <b>Temat:</b> Implementacja gry typu agar.io z użyciem bibilioteki pygame<br>
 <b>Twórcy:</b> Radosław Kopeć, Izabela Czajowska<br/>
 <b>Data Rozpoczęcia:</b> 25.03.2020
 
+## Harmonogram projektu
 
 ### I ETAP
 
