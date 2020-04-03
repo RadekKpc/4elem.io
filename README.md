@@ -14,7 +14,7 @@ Izabela Czajowska<br/>
 2. Zaimplementowanie nasłuchiwania.
 3. Tworzenie osobnego wątku dla każdego podłączonego klienta.
 4. Funkcja obsługująca pobieranie i wysyłanie danych do klienta, oraz aktualizacje zmiennych (asynchroniczne wywoływana z funkcji głównej programu w innych wątku)
-5. Ładne Readme.md ✅
+5. ✅ Ładne Readme.md
 
 * Client: 28.04.2020r. (Plik implementujący logikę łączenia się z serwerem, wysyłania i pobierania danych)
 1. Funkcja łącząca się, pobierająca id, wysyłająca UserName
