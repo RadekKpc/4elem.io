@@ -1,13 +1,13 @@
-## 4elem.io
+# 4elem.io
 
-### Harmonogram projektu
+## Harmonogram projektu
 <b>Przedmiot</b> Programowanie w języku Python</br>
 <b>Temat:</b> Implementacja gry typu agar.io z użyciem bibilioteki pygame<br>
 <b>Twórcy:</b> Radosław Kopeć, Izabela Czajowska<br/>
 <b>Data Rozpoczęcia:</b> 25.03.2020
 
 
-#### I ETAP
+### I ETAP
 
 * Server: 14.04.2020r.
 
@@ -34,7 +34,7 @@ pygame): 12.05.2020 r.
 7. Połączenie Clienta i Aplikacji
 8. Implementacja pobierania UserName i rozpoczynania gry za pomocą przycisku
 
-#### II ETAP (Udoskonalenia, realizacja mechaniki gry) 20.05.2020 r.
+### II ETAP (Udoskonalenia, realizacja mechaniki gry) 20.05.2020 r.
 
 * Client,Serwer,Aplikacja:
 
@@ -45,17 +45,17 @@ pygame): 12.05.2020 r.
 5. Dodanie ewoluowania
 6. Dodanie umiejętności
 
-#### III ETAP (Dopieszczanie grafiki) Jak starczy czasu 09.06.2020 r.
+### III ETAP (Dopieszczanie grafiki) Jak starczy czasu 09.06.2020 r.
 
 1. brazy ładowne z plików przeźroczyste tło
 2. Zredukowanie przeskoków (interpolacja liniowa gdzie tylko się da)
 3. Ranking graczy
 4. Korona przy Nicku najlepszego gracza :P
 
-#### Dodadkowe info
+### Dodadkowe info
 
 - funkcja select,
 - socety udp tcp, kop
 - kopiuj wklej ticka do readme jak cos zrobisz ✅
 
-### Opis gry
+## Opis gry
