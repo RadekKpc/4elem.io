@@ -1,6 +1,6 @@
-### 4elem.io
+## 4elem.io
 
-#### Harmonogram projektu
+### Harmonogram projektu
 <b>Przedmiot</b> Programowanie w języku Python</br>
 <b>Temat:</b> Implementacja gry typu agar.io z użyciem bibilioteki pygame<br>
 <b>Twórcy:</b> Radosław Kopeć, Izabela Czajowska<br/>
@@ -57,3 +57,5 @@ pygame): 12.05.2020 r.
 - funkcja select,
 - socety udp tcp, kop
 - kopiuj wklej ticka do readme jak cos zrobisz ✅
+
+### Opis gry
