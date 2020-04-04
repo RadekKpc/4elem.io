@@ -1,6 +1,6 @@
 import socket
 import pickle
-
+import time
 # connection setting
 HOST = '127.0.0.1'
 PORT = 22000
@@ -30,14 +30,25 @@ class Client:
         # or another significant infromations
         data_rec =  self.connection.recv(128)
         data = pickle.loads(data_rec)
-        print(data_rec)
+        print(data)
         self.id = (data['id'])
-        print("Przydzielono id: ",self.id)
+        return (data['width'],data['height'],data['id'],data['x'],data['y'])
 
     def disconnect(self):
         self.connection.close()
 
+    def send_and_get(self,x,y):
+        try:
+            data = {'x' : x,'y': y}
+            data = pickle.dumps(data)
+            self.connection.send(data)
 
-conn = Client()
-conn.connect("Radek","fire")
-conn.disconnect()
+            # Ładuje słownik pod 'food' mamy liste jedzenia klasa Ball
+            # Pod 'players' mamy slownik graczy klasa Players
+            data_rec = self.connection.recv(1024*8)
+            data_rec = pickle.loads(data_rec)
+
+        except Exception as e:
+            print(e)
+
+        return data_rec
