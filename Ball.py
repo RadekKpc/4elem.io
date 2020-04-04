@@ -1,4 +1,4 @@
-import Point
+from Point import Point
 class Ball:
 
     def __init__(self,middle,radius):

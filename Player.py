@@ -18,6 +18,8 @@ class Player:
         self.name = name
         self.elem = elem
         self.color = Player.rand_color()
+        self.level = 1
+        self.score = 0
 
     def get_x(self):
         return self.ball.middle.x
