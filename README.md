@@ -50,7 +50,7 @@ pygame): 12.05.2020 r.
 
 ### III ETAP (Dopieszczanie grafiki) Jak starczy czasu 09.06.2020 r.
 
-1. brazy ładowne z plików przeźroczyste tło
+1. Obrazy ładowne z plików przeźroczyste tło
 2. Zredukowanie przeskoków (interpolacja liniowa gdzie tylko się da)
 3. Ranking graczy
 4. Korona przy Nicku najlepszego gracza :P
@@ -60,5 +60,7 @@ pygame): 12.05.2020 r.
 - funkcja select,
 - socety udp tcp, kop
 - kopiuj wklej ticka do readme jak cos zrobisz ✅
+- żeby odpalic w 1 terminalu: python server.py
+- w 2 terminalu python app.py
 
 ## Opis gry
