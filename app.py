@@ -4,6 +4,7 @@ import client
 # DISPLAY SETTINGS
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 400
+PLAYER_RADIUS = 30
 FPS = 30
 
 
@@ -43,8 +44,8 @@ def mouse_controll():
     x = players[player_id].ball.middle.x * SCALE
     y = players[player_id].ball.middle.y * SCALE
     d = math.sqrt((y - mouse_y)**2 + (x -mouse_x)**2)
-    pos_x += int(step*(mouse_x - x)/d)
-    pos_y += int(step*(mouse_y - y)/d)
+    pos_x += int(step*(mouse_x - WINDOW_WIDTH/2)/d)
+    pos_y += int(step*(mouse_y - WINDOW_HEIGHT/2)/d)
     print(mouse_x,mouse_y)
 
 # init window
@@ -60,7 +61,9 @@ conn = client.Client()
 # data taking from start screen later
 map_width,map_height,player_id,pos_x,pos_y= conn.connect("Radek","fire")
 player_id = str(player_id)
+
 SCALE = WINDOW_HEIGHT/map_height
+
 while True:
 
     clock.tick(FPS)
@@ -76,22 +79,24 @@ while True:
     """
     Wszystko ponizej obsługuje wyswietlanie gry
     """
+    # SCALE = PLAYER_RADIUS / players[player_id].ball.radius
 
     window.fill((255,255,255))
 
     # wyswietlanie kolorow
     for f in food:
-        x = f.middle.x * SCALE
-        y = f.middle.y * SCALE
+        x = f.middle.x * SCALE - pos_x*SCALE + WINDOW_WIDTH/2
+        y = f.middle.y * SCALE - pos_y*SCALE + WINDOW_HEIGHT/2
         r = f.radius * SCALE
         pygame.draw.circle(window,(123,100,232),(int(x),int(y)),int(r))
 
     # wyswietlanie graczy
     for p in players:
-        x = players[p].ball.middle.x * SCALE
-        y = players[p].ball.middle.y * SCALE
+        x = players[p].ball.middle.x * SCALE - pos_x*SCALE + WINDOW_WIDTH/2
+        y = players[p].ball.middle.y * SCALE - pos_y*SCALE + WINDOW_HEIGHT/2
         r = players[p].ball.radius * SCALE
         pygame.draw.circle(window,players[p].color,(int(x),int(y)),int(r))
+
     pygame.display.flip()
 
 
