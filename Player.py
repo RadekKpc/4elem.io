@@ -27,4 +27,11 @@ class Player:
     def get_y(self):
         return self.ball.middle.get_y
 
+    def can_eat_player(self, other_player):
+        return self.ball.can_eat(other_player.ball)
+
+    def create_new(self,ball):
+        self.ball = ball
+        self.score = 0
+        
 

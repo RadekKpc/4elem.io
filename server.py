@@ -47,13 +47,25 @@ def start_new_game():
         food.append(rand_food())
 
 def food_eating():
-    global food
+    global food,players
     for p in players:
         for i,f in enumerate(food):
-            if p.ball == f:
-                p.score += SCORE_PER_BALL
+            if players[p].ball == f:
+                players[p].score += SCORE_PER_BALL
+                players[p].ball.calculate_radius_after_eating(f)
                 food.pop(i)
                 food.append(rand_food())
+
+def player_eat_player():
+    global players
+    for p1 in players:
+        for p2 in players:
+            if players[p1].score>players[p2].score and players[p1].can_eat_player(players[p2]): #check wchich ball is bigger and if it is possible to eat it
+                players[p1].score += players[p2].score
+                players[p1].ball.calculate_radius_after_eating(players[p2].ball)
+                new_p2_ball = random_ball(START_RADIUS)
+                players[p2].create_new(new_p2_ball) #create new ball in different place afer beeing eaten
+
 
 def player_thread_service(conn,add,player_id):
     global food,players
@@ -94,7 +106,8 @@ def player_thread_service(conn,add,player_id):
             players[str_id].ball.middle.y = data['y']
             # Sprawdzanie kolizji, zwiekszanie score i promienia
 
-            # food_eating()
+            food_eating()
+            player_eat_player()
 
             # wyslanie danych o graczach i jedzeniu
             receiv_data = pickle.dumps({'players' : players,'food' : food})
