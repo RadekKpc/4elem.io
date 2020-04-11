@@ -21,21 +21,20 @@ step = 10
 
 # Later another options
 def keyboard_controll():
-    pass
-    # global  pos_y,pos_x
-    # for event in pygame.event.get():
-    #     if event.type == pygame.QUIT:
-    #         quit()
-    #
-    #     keys = pygame.key.get_pressed()
-    #     if keys[pygame.K_w]:
-    #         pos_y -= step
-    #     if keys[pygame.K_s]:
-    #         pos_y += step
-    #     if keys[pygame.K_a]:
-    #         pos_x -= step
-    #     if keys[pygame.K_d]:
-    #         pos_x += step
+    global  pos_y,pos_x
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            quit()
+
+        # keys = pygame.key.get_pressed()
+        # if keys[pygame.K_w]:
+        #     pos_y -= step
+        # if keys[pygame.K_s]:
+        #     pos_y += step
+        # if keys[pygame.K_a]:
+        #     pos_x -= step
+        # if keys[pygame.K_d]:
+        #     pos_x += step
 
 def mouse_controll():
     global pos_x,pos_y
