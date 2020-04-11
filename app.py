@@ -47,7 +47,7 @@ window.blit(font.render("Loading...",1,(0,0,0)),(WINDOW_WIDTH/2 - 10,WINDOW_HEIG
 
 # connect and get fits data
 conn = client.Client()
-# data takieng from start screen later
+# data taking from start screen later
 map_width,map_height,player_id,pos_x,pos_y= conn.connect("Radek","fire")
 player_id = str(player_id)
 SCALE = WINDOW_HEIGHT/map_height
