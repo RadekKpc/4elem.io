@@ -19,23 +19,34 @@ map_width = -1
 map_height = -1
 step = 10
 
+# Later another options
 def keyboard_controll():
-    global  pos_y,pos_x
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            quit()
+    pass
+    # global  pos_y,pos_x
+    # for event in pygame.event.get():
+    #     if event.type == pygame.QUIT:
+    #         quit()
+    #
+    #     keys = pygame.key.get_pressed()
+    #     if keys[pygame.K_w]:
+    #         pos_y -= step
+    #     if keys[pygame.K_s]:
+    #         pos_y += step
+    #     if keys[pygame.K_a]:
+    #         pos_x -= step
+    #     if keys[pygame.K_d]:
+    #         pos_x += step
 
-        keys = pygame.key.get_pressed()
-        if keys[pygame.K_w]:
-            pos_y -= step
-        if keys[pygame.K_s]:
-            pos_y += step
-        if keys[pygame.K_a]:
-            pos_x -= step
-        if keys[pygame.K_d]:
-            pos_x += step
+def mouse_controll():
+    global pos_x,pos_y
 
-
+    (mouse_x,mouse_y) = pygame.mouse.get_pos()
+    x = players[player_id].ball.middle.x * SCALE
+    y = players[player_id].ball.middle.y * SCALE
+    d = math.sqrt((y - mouse_y)**2 + (x -mouse_x)**2)
+    pos_x += int(step*(mouse_x - x)/d)
+    pos_y += int(step*(mouse_y - y)/d)
+    print(mouse_x,mouse_y)
 
 # init window
 pygame.init()
@@ -62,6 +73,7 @@ while True:
     pos_y = players[player_id].ball.middle.y
 
     keyboard_controll()
+    mouse_controll()
     """
     Wszystko ponizej obsługuje wyswietlanie gry
     """
@@ -73,14 +85,14 @@ while True:
         x = f.middle.x * SCALE
         y = f.middle.y * SCALE
         r = f.radius * SCALE
-        pygame.draw.rect(window,(123,100,232),(x,y,r,r))
+        pygame.draw.circle(window,(123,100,232),(int(x),int(y)),int(r))
 
     # wyswietlanie graczy
     for p in players:
         x = players[p].ball.middle.x * SCALE
         y = players[p].ball.middle.y * SCALE
         r = players[p].ball.radius * SCALE
-        pygame.draw.rect(window, players[p].color, (x, y, r, r))
+        pygame.draw.circle(window,players[p].color,(int(x),int(y)),int(r))
     pygame.display.flip()
 
 

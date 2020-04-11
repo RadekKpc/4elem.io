@@ -50,7 +50,7 @@ def food_eating():
     global food,players
     for p in players:
         for i,f in enumerate(food):
-            if players[p].ball == f:
+            if players[p].ball.can_eat(f):
                 players[p].score += SCORE_PER_BALL
                 players[p].ball.calculate_radius_after_eating(f)
                 food.pop(i)
