@@ -5,6 +5,12 @@
 <b>Twórcy:</b> Radosław Kopeć, Izabela Czajowska<br/>
 <b>Data Rozpoczęcia:</b> 25.03.2020
 
+### Contributors
+
+- [Radosław Kopeć](https://github.com/radekkpc)
+
+- [Izabela Czajowska](https://github.com/iczajowska)
+
 ## Harmonogram projektu
 
 ### I ETAP
