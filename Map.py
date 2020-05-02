@@ -17,8 +17,8 @@ class Map:
         self.START_RADIUS = 10
         self.COUNT_OF_FOOD = 100
         self.FOOD_RADIUS = 20
-        self.MAP_WIDTH = 1000
-        self.MAP_HEIGHT = 1000
+        self.MAP_WIDTH = width
+        self.MAP_HEIGHT = height
         self.SCORE_PER_BALL = 10
         self.id_for_next_player = 1000
 
