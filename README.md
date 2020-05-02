@@ -39,7 +39,7 @@ pygame): 12.05.2020 r.
 5. ✅Zaimplementowanie Poruszania się (Klawiatura lub myszka zobaczy się)
 6. ✅Zaimplementowanie odświeżania 30FPS (wysyłania i pobierania danych z serwera w tym czasie)
 7. ✅Połączenie Clienta i Aplikacji
-8. Implementacja pobierania UserName i rozpoczynania gry za pomocą przycisku
+8. ✅Implementacja pobierania UserName i rozpoczynania gry za pomocą przycisku
 9. Poprawic sterowanie, poprawic wyswietlanie
 10. Zmniejszyc zakres widocznosci mapy wieksze obiekty, mniejsza widocznosc
 11. Zaimplementowac brak mozliwosci wyjscia za granice mapy
@@ -47,7 +47,7 @@ pygame): 12.05.2020 r.
 
 * Client,Serwer,Aplikacja:
 
-1. Stworzenie wyboru żywiołu
+1. ✅Stworzenie wyboru żywiołu
 2. Stworzenie żywiołów
 3. Interakcja między żywiołami
 4. ✅Dodanie jedzonka na mapie

@@ -1,14 +1,13 @@
-import pygame,sys,math,random
+import pygame, sys, math, random
 import client
+from Check_Box import CheckBox
+from menu import Menu
 
 # DISPLAY SETTINGS
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 400
 PLAYER_RADIUS = 30
 FPS = 30
-
-
-
 
 # game variables
 players = {}
@@ -20,9 +19,10 @@ map_width = -1
 map_height = -1
 step = 10
 
+
 # Later another options
-def keyboard_controll():
-    global  pos_y,pos_x
+def keyboard_control():
+    global pos_y, pos_x
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             quit()
@@ -37,32 +37,37 @@ def keyboard_controll():
         # if keys[pygame.K_d]:
         #     pos_x += step
 
-def mouse_controll():
-    global pos_x,pos_y
 
-    (mouse_x,mouse_y) = pygame.mouse.get_pos()
+def mouse_control():
+    global pos_x, pos_y
+
+    (mouse_x, mouse_y) = pygame.mouse.get_pos()
     x = players[player_id].ball.middle.x * SCALE
     y = players[player_id].ball.middle.y * SCALE
-    d = math.sqrt((y - mouse_y)**2 + (x -mouse_x)**2)
-    pos_x += int(step*(mouse_x - WINDOW_WIDTH/2)/d)
-    pos_y += int(step*(mouse_y - WINDOW_HEIGHT/2)/d)
-    print(mouse_x,mouse_y)
+    d = math.sqrt((y - mouse_y) ** 2 + (x - mouse_x) ** 2)
+    pos_x += int(step * (mouse_x - WINDOW_WIDTH / 2) / d)
+    pos_y += int(step * (mouse_y - WINDOW_HEIGHT / 2) / d)
+
 
 # init window
 pygame.init()
-font = pygame.font.SysFont("consolas",10)
+font = pygame.font.SysFont("consolas", 10)
 clock = pygame.time.Clock()
-window = pygame.display.set_mode((WINDOW_WIDTH,WINDOW_HEIGHT))
-window.fill((255,255,255))
-window.blit(font.render("Loading...",1,(0,0,0)),(WINDOW_WIDTH/2 - 10,WINDOW_HEIGHT/2))
+window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+window.fill((255, 255, 255))
+window.blit(font.render("Loading...", 1, (0, 0, 0)), (WINDOW_WIDTH / 2 - 10, WINDOW_HEIGHT / 2))
 
+# Menu rendering
+menu = Menu(window)
+nick_name, element = menu.display()
+print(nick_name,element)
 # connect and get fits data
 conn = client.Client()
 # data taking from start screen later
-map_width,map_height,player_id,pos_x,pos_y= conn.connect("Radek","fire")
+map_width, map_height, player_id, pos_x, pos_y = conn.connect(nick_name, element)
 player_id = str(player_id)
 
-SCALE = WINDOW_HEIGHT/map_height
+SCALE = WINDOW_HEIGHT / map_height
 
 while True:
 
@@ -74,30 +79,29 @@ while True:
     pos_x = players[player_id].ball.middle.x
     pos_y = players[player_id].ball.middle.y
 
-    keyboard_controll()
-    mouse_controll()
+    keyboard_control()
+    mouse_control()
     """
     Wszystko ponizej obsługuje wyswietlanie gry
     """
     # SCALE = PLAYER_RADIUS / players[player_id].ball.radius
 
-    window.fill((255,255,255))
+    window.fill((255, 255, 255))
 
-    # wyswietlanie kolorow
+    # wyswietlanie jedzenia
     for f in food:
-        x = f.middle.x * SCALE - pos_x*SCALE + WINDOW_WIDTH/2
-        y = f.middle.y * SCALE - pos_y*SCALE + WINDOW_HEIGHT/2
+        x = f.middle.x * SCALE - pos_x * SCALE + WINDOW_WIDTH / 2
+        y = f.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
         r = f.radius * SCALE
-        pygame.draw.circle(window,(123,100,232),(int(x),int(y)),int(r))
+        pygame.draw.circle(window, (123, 100, 232), (int(x), int(y)), int(r))
 
     # wyswietlanie graczy
     for p in players:
-        x = players[p].ball.middle.x * SCALE - pos_x*SCALE + WINDOW_WIDTH/2
-        y = players[p].ball.middle.y * SCALE - pos_y*SCALE + WINDOW_HEIGHT/2
+        x = players[p].ball.middle.x * SCALE - pos_x * SCALE + WINDOW_WIDTH / 2
+        y = players[p].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
         r = players[p].ball.radius * SCALE
-        pygame.draw.circle(window,players[p].color,(int(x),int(y)),int(r))
+        pygame.draw.circle(window, players[p].color, (int(x), int(y)), int(r))
 
     pygame.display.flip()
-
 
 conn.disconnect()
