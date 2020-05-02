@@ -59,7 +59,7 @@ window.fill((255, 255, 255))
 window.blit(font.render("Loading...", 1, (0, 0, 0)), (WINDOW_WIDTH / 2 - 10, WINDOW_HEIGHT / 2))
 
 # Menu rendering
-menu = Menu(window)
+menu = Menu(window,WINDOW_WIDTH, WINDOW_HEIGHT)
 nick_name, element = menu.display()
 print(nick_name,element)
 # connect and get fits data

@@ -2,15 +2,15 @@ import pygame as pg
 
 
 pg.init()
-COLOR_INACTIVE = pg.Color('lightskyblue3')
-COLOR_ACTIVE = pg.Color('dodgerblue2')
+COLOR_INACTIVE = pg.Color(0,203,230)
+COLOR_ACTIVE = pg.Color(0,203,230)
 FONT = pg.font.Font(None, 32)
 
 
 class InputBox:
 
     def __init__(self, x, y, w, h, text=''):
-        self.rect = pg.Rect(x, y, w, h)
+        self.rect = pg.Rect(x - w/2, y - h/2, w, h)
         self.color = COLOR_INACTIVE
         self.text = text
         self.txt_surface = FONT.render(text, True, self.color)
@@ -41,6 +41,7 @@ class InputBox:
     def update(self):
         # Resize the box if the text is too long.
         width = max(200, self.txt_surface.get_width()+10)
+        self.rect.x += (self.rect.w - width)/2
         self.rect.w = width
 
     def draw(self, screen):
