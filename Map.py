@@ -16,7 +16,7 @@ class Map:
         # Game settings
         self.START_RADIUS = 10
         self.COUNT_OF_FOOD = 100
-        self.FOOD_RADIUS = 20
+        self.FOOD_RADIUS = 4
         self.MAP_WIDTH = width
         self.MAP_HEIGHT = height
         self.SCORE_PER_BALL = 10
