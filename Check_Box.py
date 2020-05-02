@@ -28,9 +28,9 @@ class CheckBox:
     def display(self):
 
         if self.is_checked:
-            self.window.blit(self.checked_img, (self.x, self.y))
+            self.window.blit(self.checked_img, (self.x - self.IMAGE_WIDTH/2, self.y - self.IMAGE_HEIGHT/2))
         else:
-            self.window.blit(self.unchecked_image, (self.x, self.y))
+            self.window.blit(self.unchecked_image, (self.x - self.IMAGE_WIDTH/2, self.y - self.IMAGE_HEIGHT/2))
 
     def is_hover(self, x2, y2):
-        return x2 >= self.x and x2 <= self.x + self.IMAGE_WIDTH and y2 >= self.y and y2 <= self.y + self.IMAGE_HEIGHT
+        return x2 >= self.x - self.IMAGE_WIDTH/2 and x2 <= self.x + self.IMAGE_WIDTH/2 and y2 >= self.y - self.IMAGE_HEIGHT/2 and y2 <= self.y + self.IMAGE_HEIGHT/2
