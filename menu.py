@@ -45,12 +45,19 @@ class Menu:
             self.buttons[i].display()
         self.start_button.display()
 
-    def is_start_button_hovered(self):
+    def is_button_hovered(self):
         x, y = pygame.mouse.get_pos()
         if (self.start_button.is_hover(x, y)):
             self.start_button.image =pygame.image.load(Button.get_hover_image())
         else: 
             self.start_button.image = pygame.image.load(Button.get_image())
+        for i, button in enumerate(self.buttons):
+            flag = button.is_hover(x, y)
+            #print(flag,button.represent_value)
+            if button.is_checked:
+                self.background.is_hover_flag(button.represent_value,True)
+            else:
+                self.background.is_hover_flag(button.represent_value,flag)
 
 
 
@@ -75,7 +82,8 @@ class Menu:
 
             self.window.fill((255, 255, 255))
             self.background.display()
-            self.is_start_button_hovered()
+            self.is_button_hovered()
+            self.background.display()
             self.buttons_display()
             self.input_box1.update()
             self.input_box1.draw(self.window)
