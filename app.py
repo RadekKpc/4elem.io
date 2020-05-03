@@ -104,7 +104,7 @@ while True:
         y = players[p].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
         r = players[p].ball.radius * SCALE
         pygame.draw.circle(window, players[p].color, (int(x), int(y)), int(r))
-        element = Element(window,x,y,r,players[p].elem)
+        element = Element(window,x,y,r*0.5,players[p].elem)
         element.display()
         #players[p].element
 
