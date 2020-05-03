@@ -2,6 +2,7 @@ import pygame, sys, math, random
 import client
 from Check_Box import CheckBox
 from menu import Menu
+from Element import Element
 
 # DISPLAY SETTINGS
 WINDOW_WIDTH = 800
@@ -102,6 +103,10 @@ while True:
         y = players[p].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
         r = players[p].ball.radius * SCALE
         pygame.draw.circle(window, players[p].color, (int(x), int(y)), int(r))
+        element = Element(window,x,y,r,players[p].elem)
+        element.display()
+        #players[p].element
+
 
     pygame.display.flip()
 
