@@ -47,8 +47,9 @@ def mouse_control():
     y = players[player_id].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
     # print(mouse_x,mouse_y,pos_x,pos_y, x, y, players[player_id].ball.middle.x, players[player_id].ball.middle.y)
     d = math.sqrt((mouse_y - y) ** 2 + (mouse_x - x) ** 2)
-    pos_x += int(step * (mouse_x - WINDOW_WIDTH / 2) / d)
-    pos_y += int(step * (mouse_y - WINDOW_HEIGHT / 2) / d)
+    if d != 0:    
+        pos_x += int(step * (mouse_x - WINDOW_WIDTH / 2) / d)
+        pos_y += int(step * (mouse_y - WINDOW_HEIGHT / 2) / d)
 
 
 # init window
