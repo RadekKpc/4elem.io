@@ -1,7 +1,7 @@
 import socket
 import threading
 import pickle
-from Map import Map
+from map_components.map import Map
 
 # connection setting
 HOST = '127.0.0.1'

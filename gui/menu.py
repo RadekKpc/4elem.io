@@ -1,8 +1,8 @@
 import pygame
-from Check_Box import CheckBox
-from Button import Button
-from Input_Box import InputBox
-from Background import Background
+from gui.check_box import CheckBox
+from gui.button import Button
+from gui.input_box import InputBox
+from gui.background import Background
 
 
 class Menu:

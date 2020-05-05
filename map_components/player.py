@@ -1,5 +1,3 @@
-from Ball import Ball
-from Point import Point
 import random
 class Player:
 

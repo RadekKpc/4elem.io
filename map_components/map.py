@@ -1,7 +1,7 @@
 import random
-from Point import Point
-from Ball import Ball
-from Player import Player
+from map_components.point import Point
+from map_components.ball import Ball
+from map_components.player import Player
 
 
 class Map:

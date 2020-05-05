@@ -1,5 +1,5 @@
 import pygame as pg
-from Element import Element
+from game_view.element import Element
 
 
 class Background:
