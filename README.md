@@ -43,7 +43,7 @@ pygame): 12.05.2020 r.
 9. ✅Poprawic sterowanie 
 10. ✅poprawic wyswietlanie
 11. ✅Zmniejszyc zakres widocznosci mapy wieksze obiekty, mniejsza widocznosc
-12. Zaimplementowac brak mozliwosci wyjscia za granice mapy
+12. ✅Zaimplementowac braku mozliwosci wyjscia za granice mapy
 ### II ETAP (Udoskonalenia, realizacja mechaniki gry) 20.05.2020 r.
 
 * Client,Serwer,Aplikacja:
@@ -59,8 +59,8 @@ pygame): 12.05.2020 r.
 
 1. ✅Obrazy ładowne z plików przeźroczyste tło
 2. Zredukowanie przeskoków (interpolacja liniowa gdzie tylko się da)
-3. Ranking graczy
-4. Korona przy Nicku najlepszego gracza :P
+3. ✅Ranking graczy
+4. Korona przy Nicku najlepszego gracza :P (przy rankingu i kulce?)
 
 ### Dodadkowe info
 

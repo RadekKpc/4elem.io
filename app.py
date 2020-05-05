@@ -1,8 +1,8 @@
-import pygame, sys, math, random
+import pygame, math
 import client
-from Check_Box import CheckBox
 from menu import Menu
 from Element import Element
+from Rank import Rank
 
 # DISPLAY SETTINGS
 WINDOW_WIDTH = 800
@@ -47,9 +47,18 @@ def mouse_control():
     y = players[player_id].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
     # print(mouse_x,mouse_y,pos_x,pos_y, x, y, players[player_id].ball.middle.x, players[player_id].ball.middle.y)
     d = math.sqrt((mouse_y - y) ** 2 + (mouse_x - x) ** 2)
-    if d != 0:    
+    if d != 0:
         pos_x += int(step * (mouse_x - WINDOW_WIDTH / 2) / d)
         pos_y += int(step * (mouse_y - WINDOW_HEIGHT / 2) / d)
+
+    if pos_x < 0:
+        pos_x = 0
+    if pos_y < 0:
+        pos_y = 0
+    if pos_x > map_width:
+        pos_x = map_width
+    if pos_y > map_height:
+        pos_y = map_height
 
 
 # init window
@@ -59,11 +68,10 @@ clock = pygame.time.Clock()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 window.fill((255, 255, 255))
 window.blit(font.render("Loading...", 1, (0, 0, 0)), (WINDOW_WIDTH / 2 - 10, WINDOW_HEIGHT / 2))
-
+rank = Rank(window, WINDOW_WIDTH - 150, 0)
 # Menu rendering
-menu = Menu(window,WINDOW_WIDTH, WINDOW_HEIGHT)
+menu = Menu(window, WINDOW_WIDTH, WINDOW_HEIGHT)
 nick_name, element = menu.display()
-print(nick_name,element)
 # connect and get fits data
 conn = client.Client()
 # data taking from start screen later
@@ -78,6 +86,7 @@ while True:
 
     data = conn.send_and_get(pos_x, pos_y)
     players = data['players']
+    players_list = []
     food = data['food']
     pos_x = players[player_id].ball.middle.x
     pos_y = players[player_id].ball.middle.y
@@ -100,15 +109,27 @@ while True:
 
     # wyswietlanie graczy
     for p in players:
+        players_list.append(players[p])
         x = players[p].ball.middle.x * SCALE - pos_x * SCALE + WINDOW_WIDTH / 2
         y = players[p].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
         r = players[p].ball.radius * SCALE
         pygame.draw.circle(window, players[p].color, (int(x), int(y)), int(r))
-        element = Element(window,x,y,r*0.5,players[p].elem)
+        element = Element(window, x, y, r * 0.5, players[p].elem)
         element.display()
-        #players[p].element
+        # players[p].element
+        # showing name
+        font = pygame.font.SysFont("Consolas", int(r / 2))
+        text = font.render(players[p].name, True, pygame.Color(0, 0, 0))
+        window.blit(text, (x - (r * len(players[p].name) / 7), y + r))
 
-
+    # wyswietlanie rankingu
+    players_list = sorted(players_list, key=lambda p: p.score)
+    players_list.reverse()
+    for p in players_list:
+        print(p.name, end=" ")
+        print(p.score, end=" ")
+    rank.display(players_list)
     pygame.display.flip()
+    print()
 
 conn.disconnect()
