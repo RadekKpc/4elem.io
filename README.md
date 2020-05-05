@@ -58,7 +58,7 @@ pygame): 12.05.2020 r.
 ### III ETAP (Dopieszczanie grafiki) Jak starczy czasu 09.06.2020 r.
 
 1. ✅Obrazy ładowne z plików przeźroczyste tło
-2. Zredukowanie przeskoków (interpolacja liniowa gdzie tylko się da)
+2. ✅Zredukowanie przeskoków (interpolacja liniowa gdzie tylko się da)
 3. ✅Ranking graczy
 4. Korona przy Nicku najlepszego gracza :P (przy rankingu i kulce?)
 

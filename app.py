@@ -77,7 +77,7 @@ conn = client.Client()
 # data taking from start screen later
 map_width, map_height, player_id, pos_x, pos_y = conn.connect(nick_name, element)
 player_id = str(player_id)
-
+real_r = 0
 SCALE = WINDOW_HEIGHT / map_height
 
 while True:
@@ -96,7 +96,6 @@ while True:
     """
     Wszystko ponizej obsługuje wyswietlanie gry
     """
-    SCALE = PLAYER_RADIUS / players[player_id].ball.radius
 
     window.fill((255, 255, 255))
 
@@ -112,7 +111,12 @@ while True:
         players_list.append(players[p])
         x = players[p].ball.middle.x * SCALE - pos_x * SCALE + WINDOW_WIDTH / 2
         y = players[p].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
+        # smoothly growing
+        if p == player_id:
+            real_r += (players[p].ball.radius - real_r)*0.1
+            players[p].ball.radius = real_r
         r = players[p].ball.radius * SCALE
+
         pygame.draw.circle(window, players[p].color, (int(x), int(y)), int(r))
         element = Element(window, x, y, r * 0.5, players[p].elem)
         element.display()
@@ -122,14 +126,13 @@ while True:
         text = font.render(players[p].name, True, pygame.Color(0, 0, 0))
         window.blit(text, (x - (r * len(players[p].name) / 7), y + r))
 
+    SCALE = PLAYER_RADIUS / players[player_id].ball.radius
+
     # wyswietlanie rankingu
     players_list = sorted(players_list, key=lambda p: p.score)
     players_list.reverse()
-    for p in players_list:
-        print(p.name, end=" ")
-        print(p.score, end=" ")
+
     rank.display(players_list)
     pygame.display.flip()
-    print()
 
 conn.disconnect()
