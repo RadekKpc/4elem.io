@@ -113,8 +113,9 @@ while True:
         y = players[p].ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
         # smoothly growing
         if p == player_id:
-            real_r += (players[p].ball.radius - real_r)*0.1
+            real_r += (players[p].ball.radius - real_r) * 0.1
             players[p].ball.radius = real_r
+
         r = players[p].ball.radius * SCALE
 
         pygame.draw.circle(window, players[p].color, (int(x), int(y)), int(r))
@@ -133,6 +134,20 @@ while True:
     players_list.reverse()
 
     rank.display(players_list)
+
+    # Crown display
+    if len(players_list) > 0:
+        best_player = players_list[0]
+        x = best_player.ball.middle.x * SCALE - pos_x * SCALE + WINDOW_WIDTH / 2
+        y = best_player.ball.middle.y * SCALE - pos_y * SCALE + WINDOW_HEIGHT / 2
+        if best_player.id == player_id:
+            best_player.ball.radius = real_r
+
+        r = best_player.ball.radius * SCALE
+        image = pygame.image.load("img/crown.png")
+        image = pygame.transform.scale(image, (int(r * 2), int(r)))
+        window.blit(image, (x - r , y - r - r/2))
+
     pygame.display.flip()
 
 conn.disconnect()
