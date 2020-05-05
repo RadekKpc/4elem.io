@@ -18,16 +18,16 @@ class Menu:
         self.menu_content()
 
     def menu_content(self):
-        self.check_box_fire = CheckBox(self.window_width/2 - 150, 100, self.window, "fire")
+        self.check_box_fire = CheckBox(self.window_width / 2 - 150, 100, self.window, "fire")
         self.check_box_fire.is_checked = True
-        self.check_box_water = CheckBox(self.window_width/2 - 50, 100, self.window, "water")
-        self.check_box_earth = CheckBox(self.window_width/2 + 50, 100, self.window, "earth")
-        self.check_box_wind = CheckBox(self.window_width/2 + 150, 100, self.window, "wind")
+        self.check_box_water = CheckBox(self.window_width / 2 - 50, 100, self.window, "water")
+        self.check_box_earth = CheckBox(self.window_width / 2 + 50, 100, self.window, "earth")
+        self.check_box_wind = CheckBox(self.window_width / 2 + 150, 100, self.window, "wind")
         self.buttons = [self.check_box_fire, self.check_box_water, self.check_box_earth, self.check_box_wind]
         self.currnet_button = self.check_box_fire
-        self.start_button = Button(self.window_width/2, 350, self.window)
-        self.input_box1 = InputBox(self.window_width/2, 250, 140, 32)
-        self.background = Background(self.window,self.window_width, self.window_heigth)
+        self.start_button = Button(self.window_width / 2, 350, self.window)
+        self.input_box1 = InputBox(self.window_width / 2, 250, 140, 32)
+        self.background = Background(self.window, self.window_width, self.window_heigth)
 
     def buttons_checking(self, x, y):
         for i, button in enumerate(self.buttons):
@@ -48,18 +48,16 @@ class Menu:
     def is_button_hovered(self):
         x, y = pygame.mouse.get_pos()
         if (self.start_button.is_hover(x, y)):
-            self.start_button.image =pygame.image.load(Button.get_hover_image())
-        else: 
+            self.start_button.image = pygame.image.load(Button.get_hover_image())
+        else:
             self.start_button.image = pygame.image.load(Button.get_image())
         for i, button in enumerate(self.buttons):
             flag = button.is_hover(x, y)
-            #print(flag,button.represent_value)
+            # print(flag,button.represent_value)
             if button.is_checked:
-                self.background.is_hover_flag(button.represent_value,True)
+                self.background.is_hover_flag(button.represent_value, True)
             else:
-                self.background.is_hover_flag(button.represent_value,flag)
-
-
+                self.background.is_hover_flag(button.represent_value, flag)
 
     def display(self):
         clock = pygame.time.Clock()
@@ -90,7 +88,7 @@ class Menu:
             self.nick_name = self.input_box1.text
             pygame.display.flip()
             if flag:
-                if  self.nick_name != "Please put your nickname here" and self.nick_name != "":
+                if self.nick_name != "Please put your nickname here" and self.nick_name != "":
                     break
 
         return self.nick_name, self.currnet_button.represent_value
