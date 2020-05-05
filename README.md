@@ -52,7 +52,7 @@ pygame): 12.05.2020 r.
 2. ✅Stworzenie żywiołów
 3. Interakcja między żywiołami
 4. ✅Dodanie jedzonka na mapie
-5. Dodanie levelowania
+5. ✅Dodanie levelowania (powiekszanie przy jedzeniu)
 6. Dodanie umiejętności
 
 ### III ETAP (Dopieszczanie grafiki) Jak starczy czasu 09.06.2020 r.

@@ -1,8 +1,8 @@
 import pygame, math
 import client
-from menu import Menu
-from Element import Element
-from Rank import Rank
+from gui.menu import Menu
+from game_view.element import Element
+from game_view.rank import Rank
 
 # DISPLAY SETTINGS
 WINDOW_WIDTH = 800
