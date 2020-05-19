@@ -2,6 +2,7 @@ import pygame
 from gui.button import Button
 from map_components.player import Player
 from gui.background import Background
+from game_view.element import Element
 
 FONT = pygame.font.Font('font/Purisa, Regular.ttf', 50)
 FONT_2 = pygame.font.Font('font/Purisa, Regular.ttf', 32)
@@ -14,6 +15,9 @@ class EndGame:
         self.start_button = Button(self.window_width / 2, 350, self.window)
         self.background_image = pygame.image.load('img/background_plain.png')
         self.background_image = pygame.transform.scale(self.background_image, (self.window_width, self.window_heigth))
+        self.crown_image = pygame.image.load('img/crown.png')
+        self.crown_image = pygame.transform.scale(self.crown_image, (100,50))
+        self.crown_image = pygame.transform.rotate(self.crown_image,360-35)
         #FONT.render(self.player_winner.name)
 
     def is_button_hovered(self):
@@ -29,6 +33,7 @@ class EndGame:
         txt_surface = FONT.render(text, True, (0,0,0))
         text_2 = "Click button to play again"
         txt_surface2 = FONT_2.render(text_2, True,(0,0,0) )
+        player_element = Element(self.window, 100, 300, 100,winner.get_element())
         
         clock = pygame.time.Clock()
         flag_play_agian = False
@@ -56,6 +61,8 @@ class EndGame:
             self.start_button.display()
             self.window.blit(txt_surface, (self.window_width/2 - txt_surface.get_width()/2, 100))
             self.window.blit(txt_surface2, (self.window_width/2 - txt_surface2.get_width()/2, 200))
+            player_element.display()
+            self.window.blit(self.crown_image, (self.window_width/2 + txt_surface.get_width()/2 -50, 50))
             pygame.display.flip()
 
             if flag_play_agian:
