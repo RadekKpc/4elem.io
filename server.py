@@ -53,6 +53,8 @@ def player_thread_service(conn, add, player_id):
             receiv_data = pickle.dumps({'players': game_map.get_players(), 'food': game_map.get_food()})
             conn.send(receiv_data)
 
+            game_map.game_end_check()
+
         except Exception as e:
             print("Error2: ", e)
             break

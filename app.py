@@ -3,12 +3,14 @@ import client
 from gui.menu import Menu
 from game_view.element import Element
 from game_view.rank import Rank
+from gui.end_game import EndGame
 
 # DISPLAY SETTINGS
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 400
 PLAYER_RADIUS = 30
 FPS = 30
+WINNER_SCORE = 500
 
 # game variables
 players = {}
@@ -79,6 +81,8 @@ map_width, map_height, player_id, pos_x, pos_y = conn.connect(nick_name, element
 player_id = str(player_id)
 real_r = 0
 SCALE = WINDOW_HEIGHT / map_height
+end_game = EndGame(window,WINDOW_WIDTH,WINDOW_HEIGHT)
+play_flag = True
 
 while True:
 
@@ -149,5 +153,13 @@ while True:
         window.blit(image, (x - r , y - r - r/2))
 
     pygame.display.flip()
+
+    #end of the game
+    if players_list[0].score >= WINNER_SCORE:
+        play_flag = end_game.display(players_list[0])
+        print(play_flag)
+
+    if play_flag == False:
+        break
 
 conn.disconnect()

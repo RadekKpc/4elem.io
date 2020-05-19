@@ -21,6 +21,7 @@ class Map:
         self.MAP_HEIGHT = height
         self.SCORE_PER_BALL = 10
         self.id_for_next_player = 1000
+        self.WINNER_SCORE = 500
 
     def get_id_for_next_player(self):
         self.id_for_next_player += 1
@@ -89,3 +90,14 @@ class Map:
     def eating(self):
         self.food_eating()
         self.player_eat_player()
+
+    def game_end_check(self):
+        players_list = list(self.players.values())
+        players_list = sorted(players_list, key=lambda p: p.score)
+        players_list.reverse()
+        if players_list[0].score >= self.WINNER_SCORE:
+            for p in self.players:
+                new_p_ball = self.get_random_ball(self.START_RADIUS)
+                self.players[p].create_new(new_p_ball)
+                self.players[p].score = 0 
+            
