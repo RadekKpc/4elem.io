@@ -125,7 +125,7 @@ while True:
         # showing name
         font = pygame.font.SysFont("Consolas", int(r / 2))
         text = font.render(players[p].name, True, pygame.Color(0, 0, 0))
-        window.blit(text, (x - (r * len(players[p].name) / 7), y + r))
+        window.blit(text, (x - (text.get_width()/2), y + r))
 
     SCALE = PLAYER_RADIUS / players[player_id].ball.radius
 
