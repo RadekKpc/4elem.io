@@ -37,8 +37,7 @@ def player_thread_service(conn, add, player_id):
         try:
 
             # Uaktualnienie pozycji
-            data = conn.recv(32)
-
+            data = conn.recv(64)
             if not data:
                 break
             data = pickle.loads(data)
@@ -51,6 +50,9 @@ def player_thread_service(conn, add, player_id):
 
             # wyslanie danych o graczach i jedzeniu
             receiv_data = pickle.dumps({'players': game_map.get_players(), 'food': game_map.get_food()})
+            msg_length = len(receiv_data)
+            msg_l = pickle.dumps(msg_length)
+            conn.send(msg_l)
             conn.send(receiv_data)
 
             game_map.game_end_check()

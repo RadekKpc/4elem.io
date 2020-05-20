@@ -3,20 +3,17 @@ import pickle
 
 
 # connection setting
-HOST = '127.0.0.1'
-PORT = 22000
-
 
 class Client:
 
-    def __init__(self):
-        self.host = HOST
-        self.port = PORT
+    def __init__(self, ip, port):
+        self.host = ip
+        self.port = port
         self.connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.id = -1
 
     def connect(self, name, elem):
-        self.connection.connect((HOST, PORT))
+        self.connection.connect((self.host, self.port))
         """
         After connection we need:
         1. send name and element type
@@ -39,6 +36,7 @@ class Client:
         self.connection.close()
 
     def send_and_get(self, x, y):
+        data_rec = ""
         try:
             data = {'x': x, 'y': y}
             data = pickle.dumps(data)
@@ -46,9 +44,15 @@ class Client:
 
             # Ładuje słownik pod 'food' mamy liste jedzenia klasa Ball
             # Pod 'players' mamy slownik graczy klasa Players
-            data_rec = self.connection.recv(1024 * 8)
-            data_rec = pickle.loads(data_rec)
-
+            length = self.connection.recv(6)
+            length = pickle.loads(length)
+            data = b''
+            while True:
+                packet = self.connection.recv(4096)
+                data += packet
+                if len(data) >= length:
+                    break
+            data_rec = pickle.loads(data)
         except Exception as e:
             print(e)
 

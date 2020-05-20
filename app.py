@@ -73,9 +73,10 @@ window.blit(font.render("Loading...", 1, (0, 0, 0)), (WINDOW_WIDTH / 2 - 10, WIN
 rank = Rank(window, WINDOW_WIDTH - 150, 0)
 # Menu rendering
 menu = Menu(window, WINDOW_WIDTH, WINDOW_HEIGHT)
-nick_name, element = menu.display()
+nick_name, element, ip, port = menu.display()
+port = int(port)
 # connect and get fits data
-conn = client.Client()
+conn = client.Client(ip,port)
 # data taking from start screen later
 map_width, map_height, player_id, pos_x, pos_y = conn.connect(nick_name, element)
 player_id = str(player_id)
@@ -88,13 +89,16 @@ while True:
 
     clock.tick(FPS)
 
-    data = conn.send_and_get(pos_x, pos_y)
-    players = data['players']
-    players_list = []
-    food = data['food']
-    pos_x = players[player_id].ball.middle.x
-    pos_y = players[player_id].ball.middle.y
-
+    try :
+        data = conn.send_and_get(pos_x, pos_y)
+        players = data['players']
+        players_list = []
+        food = data['food']
+        pos_x = players[player_id].ball.middle.x
+        pos_y = players[player_id].ball.middle.y
+    except Exception as e:
+        print(e)
+        continue
     keyboard_control()
     mouse_control()
     """

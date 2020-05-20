@@ -15,7 +15,7 @@ class Map:
         self.food = []
         # Game settings
         self.START_RADIUS = 10
-        self.COUNT_OF_FOOD = 100
+        self.COUNT_OF_FOOD = 70
         self.FOOD_RADIUS = 4
         self.MAP_WIDTH = width
         self.MAP_HEIGHT = height

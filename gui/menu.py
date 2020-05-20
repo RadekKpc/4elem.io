@@ -16,6 +16,8 @@ class Menu:
         self.window_width = width
         self.window_heigth = height
         self.menu_content()
+        self.ip = "127.0.0.1"
+        self.port = 22000
 
     def menu_content(self):
         self.check_box_fire = CheckBox(self.window_width / 2 - 150, 100, self.window, "fire")
@@ -26,8 +28,10 @@ class Menu:
         self.buttons = [self.check_box_fire, self.check_box_water, self.check_box_earth, self.check_box_wind]
         self.currnet_button = self.check_box_fire
         self.start_button = Button(self.window_width / 2, 350, self.window)
-        self.input_box1 = InputBox(self.window_width / 2, 250, 140, 32)
+        self.input_box1 = InputBox(self.window_width / 2, 200, 140, 32)
         self.background = Background(self.window, self.window_width, self.window_heigth)
+        self.input_port = InputBox(self.window_width / 2, 300, 140, 32)
+        self.input_ip = InputBox(self.window_width / 2, 250, 140, 32)
 
     def buttons_checking(self, x, y):
         for i, button in enumerate(self.buttons):
@@ -77,6 +81,9 @@ class Menu:
                     x, y = pygame.mouse.get_pos()
                     flag = self.buttons_checking(x, y)
                 self.input_box1.handle_event(event)
+                self.input_port.handle_event(event)
+                self.input_ip.handle_event(event)
+
 
             self.window.fill((255, 255, 255))
             self.background.display()
@@ -86,9 +93,17 @@ class Menu:
             self.input_box1.update()
             self.input_box1.draw(self.window)
             self.nick_name = self.input_box1.text
+
+            self.input_ip.update()
+            self.input_ip.draw(self.window)
+            self.ip = self.input_ip.text
+
+            self.input_port.update()
+            self.input_port.draw(self.window)
+            self.port = self.input_port.text
             pygame.display.flip()
             if flag:
                 if self.nick_name != "Please put your nickname here" and self.nick_name != "":
                     break
 
-        return self.nick_name, self.currnet_button.represent_value
+        return self.nick_name, self.currnet_button.represent_value, self.ip, self.port
