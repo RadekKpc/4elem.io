@@ -1,16 +1,17 @@
 import random
+
+
 class Player:
 
     @staticmethod
     def rand_color():
-        red = random.randint(0,256)
-        green = random.randint(0,256)
-        blue = random.randint(0,256)
+        red = random.randint(0, 256)
+        green = random.randint(0, 256)
+        blue = random.randint(0, 256)
 
-        return (red,green,blue)
+        return (red, green, blue)
 
-    def __init__(self,ball,id,name,elem):
-
+    def __init__(self, ball, id, name, elem):
         self.ball = ball
         self.id = id
         self.name = name
@@ -29,10 +30,8 @@ class Player:
         return self.elem
 
     def can_eat_player(self, other_player):
-        return self.ball.can_eat(other_player.ball) and (self.elem != other_player.get_element() )
+        return self.ball.can_eat(other_player.ball) and (self.elem != other_player.get_element())
 
-    def create_new(self,ball):
+    def create_new(self, ball):
         self.ball = ball
         self.score = 0
-        
-

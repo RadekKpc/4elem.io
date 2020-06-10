@@ -6,16 +6,16 @@ from map_components.map import Map
 # connection setting
 HOST = '127.0.0.1'
 PORT = 22000
-
+BACKLOG = 30
 MAP_WIDTH = 1000
 MAP_HEIGHT = 1000
 
 game_map = Map(MAP_WIDTH, MAP_HEIGHT)
 
 
-def player_thread_service(conn, add, player_id):
+def player_thread_service(connection, player_id):
     # receive name and elem from client
-    data = conn.recv(64)
+    data = connection.recv(64)
     start_data = pickle.loads(data)
 
     name = start_data['name']
@@ -25,11 +25,11 @@ def player_thread_service(conn, add, player_id):
     x, y = game_map.create_new_player(player_id, name, elem)
 
     # sending id (pozniej moze ustawienia mapy lub cos zoabczymy)
-    conn.send(pickle.dumps({'id': player_id,
-                            'width': MAP_WIDTH,
-                            'height': MAP_HEIGHT,
-                            'x': x,
-                            'y': y}))
+    connection.send(pickle.dumps({'id': player_id,
+                                  'width': MAP_WIDTH,
+                                  'height': MAP_HEIGHT,
+                                  'x': x,
+                                  'y': y}))
 
     # petla obsługująca rządania klienta
 
@@ -37,7 +37,7 @@ def player_thread_service(conn, add, player_id):
         try:
 
             # Uaktualnienie pozycji
-            data = conn.recv(64)
+            data = connection.recv(64)
             if not data:
                 break
             data = pickle.loads(data)
@@ -52,42 +52,41 @@ def player_thread_service(conn, add, player_id):
             receiv_data = pickle.dumps({'players': game_map.get_players(), 'food': game_map.get_food()})
             msg_length = len(receiv_data)
             msg_l = pickle.dumps(msg_length)
-            conn.send(msg_l)
-            conn.send(receiv_data)
+            connection.send(msg_l)
+            connection.send(receiv_data)
 
             game_map.game_end_check()
 
-        except Exception as e:
-            print("Error2: ", e)
+        except Exception as ex:
+            print("Error2: ", ex)
             break
 
-    conn.close()
+    connection.close()
 
 
 # PROGRAM
 
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-try:
-    s.bind((HOST, PORT))
-    s.listen()
-except socket.error as e:
-    print("Error", (str(e)))
-    quit()
-
-print("Starting new game...")
-game_map.start_new_game()
-print("Listen on " + str(HOST) + ":" + str(PORT) + " ...")
-
-while True:
-
+if __name__ == "__main__":
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try:
-        conn, add = s.accept()
-        print("New connection with:", add)
+        s.bind((HOST, PORT))
+        s.listen(BACKLOG)
     except socket.error as e:
         print("Error", (str(e)))
         quit()
-    id_for_next_player = game_map.get_id_for_next_player()
-    threading.Thread(target=player_thread_service,
-                     kwargs={'conn': conn, 'add': add, 'player_id': id_for_next_player}).start()
 
-print("Server exit")
+    print("Starting new game...")
+    game_map.start_new_game()
+    print("Listen on " + str(HOST) + ":" + str(PORT) + " ...")
+
+    while True:
+
+        try:
+            conn, add = s.accept()
+            print("New connection with:", add)
+            id_for_next_player = game_map.get_id_for_next_player()
+            threading.Thread(target=player_thread_service,
+                             kwargs={'connection': conn, 'player_id': id_for_next_player}).start()
+        except socket.error as e:
+            print("Error", (str(e)))
+            quit()

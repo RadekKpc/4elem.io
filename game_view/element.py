@@ -29,17 +29,20 @@ class Element:
 
     @staticmethod
     def get_element_image(element, r, flag):
-        if element == "fire":
-            image = pg.image.load(Element.get_fire_image(flag))
+        try:
+            if element == "fire":
+                image = pg.image.load(Element.get_fire_image(flag))
 
-        if element == "wind":
-            image = pg.image.load(Element.get_wind_image(flag))
+            if element == "wind":
+                image = pg.image.load(Element.get_wind_image(flag))
 
-        if element == "earth":
-            image = pg.image.load(Element.get_earth_image(flag))
+            if element == "earth":
+                image = pg.image.load(Element.get_earth_image(flag))
 
-        if element == "water":
-            image = pg.image.load(Element.get_water_image(flag))
+            if element == "water":
+                image = pg.image.load(Element.get_water_image(flag))
+        except Exception as e:
+            print(e)
 
         image = pg.transform.scale(image, (int(r * 2), int(r * 2)))
         return image

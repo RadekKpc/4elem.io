@@ -14,7 +14,10 @@ class Background:
         self.y = 0
         self.width = width
         self.height = height
-        self.image = pg.image.load(Background.get_background_image())
+        try:
+            self.image = pg.image.load(Background.get_background_image())
+        except Exception as e:
+            print(e)
         self.image = pg.transform.scale(self.image, (width, height))
         self.fire = Element(window, 100, 300, 100, "fire")
         self.water = Element(window, 180, 240, 100, "water")
