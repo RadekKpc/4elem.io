@@ -99,5 +99,4 @@ class Map:
             for p in self.players:
                 new_p_ball = self.get_random_ball(self.START_RADIUS)
                 self.players[p].create_new(new_p_ball)
-                self.players[p].score = 0 
-            
+                self.players[p].score = 0

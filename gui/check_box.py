@@ -18,8 +18,11 @@ class CheckBox:
         self.x = x
         self.y = y
         self.window = window
-        self.checked_img = pg.image.load(CheckBox.get_check_image())
-        self.unchecked_image = pg.image.load(CheckBox.get_unchecked_image())
+        try:
+            self.checked_img = pg.image.load(CheckBox.get_check_image())
+            self.unchecked_image = pg.image.load(CheckBox.get_unchecked_image())
+        except Exception as e:
+            print(e)
         self.represent_value = represent_value
 
     def toggle(self):
@@ -33,4 +36,4 @@ class CheckBox:
             self.window.blit(self.unchecked_image, (self.x - self.IMAGE_WIDTH/2, self.y - self.IMAGE_HEIGHT/2))
 
     def is_hover(self, x2, y2):
-        return x2 >= self.x - self.IMAGE_WIDTH/2 and x2 <= self.x + self.IMAGE_WIDTH/2 and y2 >= self.y - self.IMAGE_HEIGHT/2 and y2 <= self.y + self.IMAGE_HEIGHT/2
+        return self.x - self.IMAGE_WIDTH / 2 <= x2 <= self.x + self.IMAGE_WIDTH / 2 and self.y - self.IMAGE_HEIGHT / 2 <= y2 <= self.y + self.IMAGE_HEIGHT / 2

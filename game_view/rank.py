@@ -11,12 +11,15 @@ class Rank:
         self.width = 150
         self.height = 200
         self.font_size = 18
-        self.image = pygame.image.load('img/rank.png')
+        try:
+            self.image = pygame.image.load('img/rank.png')
+        except Exception as e:
+            print(e)
         self.image = pygame.transform.scale(self.image, (self.width, self.height))
 
     def display(self, players_list):
 
-        self.window.blit(self.image,(self.x,self.y))
+        self.window.blit(self.image, (self.x, self.y))
 
         for i, p in enumerate(players_list):
             font = pygame.font.SysFont("Consolas", self.font_size)

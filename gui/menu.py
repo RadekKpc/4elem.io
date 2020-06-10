@@ -40,7 +40,7 @@ class Menu:
                 self.currnet_button.toggle()
                 self.currnet_button = self.buttons[i]
 
-        if (self.start_button.is_hover(x, y)):
+        if self.start_button.is_hover(x, y):
             return True
         return False
 
@@ -51,10 +51,16 @@ class Menu:
 
     def is_button_hovered(self):
         x, y = pygame.mouse.get_pos()
-        if (self.start_button.is_hover(x, y)):
-            self.start_button.image = pygame.image.load(Button.get_hover_image())
+        if self.start_button.is_hover(x, y):
+            try:
+                self.start_button.image = pygame.image.load(Button.get_hover_image())
+            except Exception as e:
+                print(e)
         else:
-            self.start_button.image = pygame.image.load(Button.get_image())
+            try:
+                self.start_button.image = pygame.image.load(Button.get_image())
+            except Exception as e:
+                print(e)
         for i, button in enumerate(self.buttons):
             flag = button.is_hover(x, y)
             # print(flag,button.represent_value)
